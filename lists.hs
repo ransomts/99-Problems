@@ -49,3 +49,14 @@ flatten = reverse . rec []
   rec acc (List []) = acc
   rec acc (Elem x)  = x:acc
   rec acc (List (x:xs)) = rec (rec acc x) (List xs)
+
+-- 8 Problem 8
+-- (**) Eliminate consecutive duplicates of list elements.
+
+-- If a list contains repeated elements they should be replaced with a single copy of the element. The order of the elements should not be changed.
+compress [] = []
+compress (x : xs)
+  | xs == [] = [x]
+  | x == head xs = compress xs
+  | otherwise = x : compress xs
+  
