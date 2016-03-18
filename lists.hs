@@ -60,3 +60,13 @@ compress (x : xs)
   | x == head xs = compress xs
   | otherwise = x : compress xs
   
+-- 9 Problem 9
+-- (**) Pack consecutive duplicates of list elements into sublists. If a list contains repeated elements they should be placed in separate sublists.
+pack [] = []
+pack [x] = [[x]]
+pack (x : xs) = if x `elem` (head (pack xs))
+                then (x:(head (pack xs))):(tail (pack xs))
+                else [x]:(pack xs)
+
+-- 10 Problem 10
+-- (*) Run-length encoding of a list. Use the result of problem P09 to implement the so-called run-length encoding data compression method. Consecutive duplicates of elements are encoded as lists (N E) where N is the number of duplicates of the element E.
