@@ -72,3 +72,18 @@ pack (x : xs) = if x `elem` (head (pack xs))
 -- (*) Run-length encoding of a list. Use the result of problem P09 to implement the so-called run-length encoding data compression method. Consecutive duplicates of elements are encoded as lists (N E) where N is the number of duplicates of the element E.
 encode :: Eq t => [t] -> [(Int, t)]
 encode xs = map (\x -> (length x, head x)) (pack xs)
+
+
+-- 11 Problem 11
+-- (*) Modified run-length encoding.
+
+-- Modify the result of problem 10 in such a way that if an element has no duplicates it is simply copied into the result list. Only elements with duplicates are transferred as (N E) lists.
+data ListItem a = Single a | Multiple Int a
+                  deriving (Show)
+encodeModified :: Eq a => [a] -> [ListItem a]                           
+encodeModified = map encodeHelper . encode
+  where
+    encodeHelper (1, x) = Single x
+    encodeHelper (n, x) = Multiple n x
+
+-- list problems go through 30
